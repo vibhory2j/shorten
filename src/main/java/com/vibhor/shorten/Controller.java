@@ -26,6 +26,7 @@ public class Controller {
         this.statisticsService = statisticsService;
     }
 
+    //Request to shorten a long url
     @RequestMapping(value = "/api/shorten", method = RequestMethod.POST)
     public ResponseEntity<String> shortenUrl(@RequestBody final ShortenUrl shortenRequest, HttpServletRequest request) throws Exception{
 
@@ -45,6 +46,7 @@ public class Controller {
         return new ResponseEntity<String>(shortUrl, HttpStatus.OK);
     }
 
+    //Request to get statistics for all the shortened URL' accessed
     @RequestMapping(value = "/api/statistics", method = RequestMethod.GET)
     public ResponseEntity<Statistics> statisticsByUser(){
         //validate if admin user
@@ -52,6 +54,7 @@ public class Controller {
         return new ResponseEntity<Statistics>(statisticsService.generateAllStatistics(), HttpStatus.OK);
     }
 
+    //Request to hit a short url and get redirected actual url
     @RequestMapping(value = "/api/{id}", method = RequestMethod.GET)
     public RedirectView convertUrl(@PathVariable(value = "id") String Surl) {
 
